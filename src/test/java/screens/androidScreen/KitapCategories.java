@@ -118,7 +118,7 @@ public class KitapCategories {
     //edebiay modulu screenleri
 
     @FindBy (id = "com.mobisoft.kitapyurdu:id/btnGoToProduct")
-    public WebElement edebiyattumurunler;
+    public List<WebElement> edebiyattumurunler;
 
     @FindBy (xpath = "//android.widget.LinearLayout[@content-desc=\"Roman (çeviri) Tümü\"]/android.widget.TextView")
     public WebElement roman;
@@ -146,6 +146,12 @@ public class KitapCategories {
     @FindBy(xpath = "//android.widget.TextView[@resource-id='com.mobisoft.kitapyurdu:id/textViewSortType'])")
     public List<WebElement> siralama;
 
+    @FindBy(xpath = "//android.widget.TextView[@text='Ucuzdan Pahalıya']")
+    public WebElement ucuzdanPahaliya;
+
+
+    @FindBy(xpath = "//android.widget.TextView[@text='Pahalıdan Ucuza']")
+    public WebElement pahalidanaucuza;
 
 
 }

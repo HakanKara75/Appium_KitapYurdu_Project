@@ -54,4 +54,4 @@ Scenario: edebiyat modulu
         And  kullanici "roman" a tiklar
       #  And kullanici ilk kitapi sepete ekler
 And options alanlarinin gorunurlugunu ve secilebilirligini dogrulanir
-
+And ucuzdan pahaliya tiklar

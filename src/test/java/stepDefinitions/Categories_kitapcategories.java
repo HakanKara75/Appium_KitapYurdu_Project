@@ -3,9 +3,9 @@ package stepDefinitions;
 import io.cucumber.java.en.*;
 
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import screens.Screens;
 import utils.ConfigReader;
 import utils.Driver;
@@ -13,6 +13,7 @@ import utils.ReusableMethods;
 
 import java.util.List;
 
+import static java.lang.Double.parseDouble;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static utils.ReusableMethods.*;
@@ -66,11 +67,11 @@ public class Categories_kitapcategories {
         screens.kitapCategories().kitap.click();
 
         tapOn(screens.kitapCategories().edebiyat);
-     //   assertTrue(screens.kitapCategories().edebiyat.isEnabled());
+        //   assertTrue(screens.kitapCategories().edebiyat.isEnabled());
         backToPreScreen();
 
         tapOn(screens.kitapCategories().CocukKitabi);
-      //  assertTrue(screens.kitapCategories().CocukKitabi.isEnabled());
+        //  assertTrue(screens.kitapCategories().CocukKitabi.isEnabled());
         backToPreScreen();
         tapOn(screens.kitapCategories().islam);
         backToPreScreen();
@@ -92,7 +93,7 @@ public class Categories_kitapcategories {
 
         tapOn(screens.kitapCategories().orjınaldıl);
         backToPreScreen();
-scroll(Driver.getDriver(),2);
+        scroll(Driver.getDriver(), 2);
         tapOn(screens.kitapCategories().dıger);
         backToPreScreen();
         //devami gelecek
@@ -123,14 +124,11 @@ scroll(Driver.getDriver(),2);
 
     @And("kullanici kac adet kitap oldugunu dogrular")
     public void kullaniciKacAdetKitapOldugunuDogrular() {
-        List<WebElement> categoryElements = Driver.getDriver().findElements(By.id("com.mobisoft.kitapyurdu:id/btnGoToProduct")); // Kategorileri temsil eden elementleri seçin
-
+        List<WebElement> categoryElements = screens.kitapCategories().edebiyattumurunler;
+        int actualBookCount = categoryElements.size();
         for (WebElement category : categoryElements) {
-           categoryElements.size();
-            System.out.println("categoryElements.size() = " + categoryElements.size());
-            System.out.println("category.getSize() = " + category.getSize());
-
-
+            System.out.println("category = " + category);
+//burada neden kac tane oldugunu bulamiyorum
         }
 
     }
@@ -159,22 +157,32 @@ scroll(Driver.getDriver(),2);
     }
 
 
-
     @And("options alanlarinin gorunurlugunu ve secilebilirligini dogrulanir")
     public void optionsAlanlarininGorunurlugunuVeSecilebilirliginiDogrulanir() throws InterruptedException {
         screens.kitapCategories().sirala.click();
-        List<WebElement>options=screens.kitapCategories().siralama;
+        List<WebElement> options = screens.kitapCategories().siralama;
 
-      //  System.out.println("options.get(0).getText() = " + options.get(0).getText());
+        //  System.out.println("options.get(0).getText() = " + options.get(0).getText());
         for (WebElement element : options) {
 
             System.out.println("element = " + element.getText());
             Thread.sleep(1000);
             assertTrue(element.isDisplayed());
-            System.out.println( element.getText()+" goruntuleniyor");
+            System.out.println(element.getText() + " goruntuleniyor");
             assertFalse(element.isSelected());
-            System.out.println( element.getText()+" secili degil");
+            System.out.println(element.getText() + " secili degil");
         }
 
+
     }
+
+    @And("ucuzdan pahaliya tiklar")
+    public void ucuzdanPahaliyaTiklar() {
+
+         if (screens.kitapCategories().siralama != null) {
+      screens.kitapCategories().ucuzdanPahaliya.click(); // Örnek bir tıklama işlemi
+       }else
+        screens.kitapCategories().ucuzdanPahaliya.click();
+    }
+
 }
