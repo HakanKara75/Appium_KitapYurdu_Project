@@ -36,6 +36,7 @@ public class Ahsap_Products_Steps extends Screens {
             char Ahsap_Urun_Sayisi = ahsap_Urun_Sayisi_Metin.charAt(i);
             if (Character.isDigit(Ahsap_Urun_Sayisi)) {
                 System.out.print(Ahsap_Urun_Sayisi + " Adet Kesme Tahtası Bulunmaktadır.");
+                //Deneme
             }
         }}
 
