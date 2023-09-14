@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class Puzzle_Yapboz_Screen extends KitapYurdu{
 
+
     @FindBy(xpath = "(//android.widget.ImageView[@resource-id='com.mobisoft.kitapyurdu:id/icon'])[3]")
     public WebElement kategoriler;
     @FindBy(xpath = "(//android.widget.ImageView[@resource-id='com.mobisoft.kitapyurdu:id/imageView'])[6]")
