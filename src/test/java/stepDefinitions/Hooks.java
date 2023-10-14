@@ -8,8 +8,12 @@ import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import utils.Driver;
+
+import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+
+import static utils.Driver.getDriver;
 import static utils.Driver.isAppiumServerRunning;
 
 public class Hooks {
@@ -64,9 +68,10 @@ public class Hooks {
     }
 
 
+
     @After
     public void tearDown(Scenario scenario) throws InterruptedException {
-        final byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+        final byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
         if (scenario.isFailed()) {
             scenario.attach(screenshot, "image/png", "screenshots");
         }
