@@ -4,7 +4,6 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.commons.io.FileUtils;
-import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Pause;
@@ -12,13 +11,8 @@ import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.asserts.SoftAssert;
-import screens.Screens;
-import stepDefinitions.ScreenshotStepDefs;
-
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.*;
@@ -27,7 +21,10 @@ import static java.lang.Double.parseDouble;
 
 public class ReusableMethods {
 
-
+    /**
+     * Elementi klikleme metodu
+     * @param text click yapilacak elementin classname'i string olarak parametreye girilir.
+     */
     public static void tapOnElementWithText(String text) {
         List<WebElement> mobileElementList = Driver.getDriver().findElements(By.className("android.widget.TextView"));
         for (WebElement page: mobileElementList) {
@@ -40,6 +37,18 @@ public class ReusableMethods {
         }
     }
 
+    /**
+     * Elementi klikleme metodu. Elementi list olarak alır ve 0. elemena tiklar
+     * @param elementText olarak elementin xpath'i verilir
+     * @throws InterruptedException
+     */
+    public static void clickOnElementWithText(String elementText) throws InterruptedException {
+        Thread.sleep(4000);
+        List<WebElement> mobileElementList = Driver.getDriver().findElements(By.xpath("//android.widget.TextView[@text='"+elementText+"']"));
+        if (mobileElementList.size()>0){
+            mobileElementList.get(0).click();
+        }else scrollWithUiScrollable(elementText);
+    }
     public static boolean isElementPresent(String text) {
         boolean elementFound = false;
         List<WebElement> mobileElementList = Driver.getDriver().findElements(By.xpath("//android.widget.TextView[@text='" + text + "']"));
@@ -106,6 +115,11 @@ public class ReusableMethods {
         tapOn(driver.findElement(By.xpath("//android.widget.TextView[@text='" + elementText + "']")));
     }
 
+    /**
+     * Elemente click yaoma.
+     * @param driver
+     * @param element click yapilacak elementin locate'i girilir
+     */
     public static void tap(AppiumDriver driver, WebElement element) {
         Point location = element.getLocation();
         Dimension size = element.getSize();
@@ -122,6 +136,11 @@ public class ReusableMethods {
         driver.perform(Collections.singletonList(sequence));
     }
 
+    /**
+     * Double click
+     * @param driver
+     * @param element double click yapilacak elementin locate girilir.
+     */
     public static void doubleTap(AppiumDriver driver, WebElement element) {
         Point location = element.getLocation();
         Dimension size = element.getSize();
@@ -143,6 +162,11 @@ public class ReusableMethods {
 
     }
 
+    /**
+     * uzun dokunma, bekleme yapma metodu
+     * @param driver
+     * @param element üstünde uzun bekleme yapilacak elementin locate girilir
+     */
     public static void longTap(AppiumDriver driver, WebElement element) {
         Point location = element.getLocation();
         Dimension size = element.getSize();
@@ -159,6 +183,11 @@ public class ReusableMethods {
         driver.perform(Collections.singletonList(sequence));
     }
 
+    /** scroll metodu
+     * @param driver
+     * @param scroll
+     * @throws InterruptedException
+     */
     public static void scroll(AppiumDriver driver, int scroll) throws InterruptedException {
         Dimension size = driver.manage().window().getSize();
         int startX = size.getWidth() / 2 ;
@@ -184,7 +213,11 @@ public class ReusableMethods {
         Thread.sleep(3000);
     }
 
-    //Sağa kaydırma
+    /**Sağa kaydırma
+     * @param driver
+     * @param scroll
+     * @throws InterruptedException
+     */
     public static void swipe(AppiumDriver driver, int scroll) throws InterruptedException {
         Dimension size = driver.manage().window().getSize();
         int startX = size.getWidth() / 2 ;
