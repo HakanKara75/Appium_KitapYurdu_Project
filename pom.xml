@@ -106,6 +106,13 @@
             <artifactId>java-client</artifactId>
             <version>8.6.0</version>
         </dependency>
+        <!-- Allure Report icin -->
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-cucumber7-jvm -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <version>2.19.0</version>
+        </dependency>
 
 
     </dependencies>
